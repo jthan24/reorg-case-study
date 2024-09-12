@@ -1,0 +1,27 @@
+.idea
+__pycache__/
+# for poetry config virtualenvs.inproject true
+.venv
+# postgres data directory
+data
+*.pem
+.DS_Store
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Scrapy stuff:
+.scrapy
+.env
