@@ -59,3 +59,5 @@ COPY main.py .
 EXPOSE 8000
 ENTRYPOINT /docker-entrypoint.sh $0 $@
 CMD [ "fastapi", "dev", "main.py"]
+
+## This dockerfile was based on https://github.com/svx/poetry-fastapi-docker/blob/main/Dockerfile
