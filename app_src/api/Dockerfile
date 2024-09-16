@@ -55,9 +55,13 @@ RUN poetry install
 
 WORKDIR /app
 COPY main.py .
+COPY pyproject.toml .
 
 EXPOSE 8000
 ENTRYPOINT /docker-entrypoint.sh $0 $@
+#CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+#CMD [ "poetry", "run", "python", "main.py"]
 CMD [ "fastapi", "dev", "main.py"]
+
 
 ## This dockerfile was based on https://github.com/svx/poetry-fastapi-docker/blob/main/Dockerfile
