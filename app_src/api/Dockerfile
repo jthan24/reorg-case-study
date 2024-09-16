@@ -27,6 +27,18 @@ RUN buildDeps="build-essential" \
 # Install Poetry - respects $POETRY_VERSION & $POETRY_HOME
 ENV POETRY_VERSION=1.8.2
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+#
+# docker run --rm --name testApiPoetry -it -v $(pwd):/app -p 8000:8000 python:3.12-slim-bullseye bash
+# cd /app
+# apt update 
+# apt install curl -y 
+# curl -sSL https://install.python-poetry.org | POETRY_HOME="/opt/poetry" python3 - --version 1.8.2
+# /opt/poetry/bin/poetry install 
+# /opt/poetry/bin/poetry shell
+# fastapi dev main.py
+#
+
 RUN curl -sSL https://install.python-poetry.org | POETRY_HOME=${POETRY_HOME} python3 - --version ${POETRY_VERSION} && \
     chmod a+x /opt/poetry/bin/poetry
 
@@ -58,10 +70,6 @@ COPY main.py .
 COPY pyproject.toml .
 
 EXPOSE 8000
-ENTRYPOINT /docker-entrypoint.sh $0 $@
-#CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
-#CMD [ "poetry", "run", "python", "main.py"]
-CMD [ "fastapi", "dev", "main.py"]
-
+CMD [ "poetry", "run", "fastapi", "run"]
 
 ## This dockerfile was based on https://github.com/svx/poetry-fastapi-docker/blob/main/Dockerfile
