@@ -72,3 +72,21 @@ resource "aws_lambda_function" "test_lambda" {
     description = "lambda-app"
   })
 }
+
+
+resource "aws_scheduler_schedule" "lambda_schedule" {
+  name = "lambda-schedule"
+
+  flexible_time_window {
+    mode = "OFF"
+  }
+
+  schedule_expression = "rate(1 hours)"
+
+  target {
+    arn      = aws_lambda_function.test_lambda.arn
+    role_arn = aws_iam_role.iam_for_lambda.arn
+  }
+
+  description = "Schedule for a lambda"
+}
