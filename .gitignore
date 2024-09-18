@@ -25,3 +25,9 @@ cover/
 # Scrapy stuff:
 .scrapy
 .env
+
+.credentials
+
+# for terraform
+
+.terraform
